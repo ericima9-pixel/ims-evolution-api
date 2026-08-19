@@ -11,15 +11,7 @@ services:
       - key: AUTHENTICATION_TYPE
         value: apikey
       - key: DATABASE_ENABLED
-        value: "true"
-      - key: DATABASE_PROVIDER
-        value: postgresql
-      - key: DATABASE_CONNECTION_URI
-        fromDatabase:
-          name: evolution-db
-          property: connectionString
-      - key: DATABASE_SAVE_DATA_INSTANCE
-        value: "true"
+        value: "false"
       - key: CACHE_REDIS_ENABLED
         value: "true"
       - key: CACHE_REDIS_URI
@@ -38,9 +30,3 @@ services:
     name: evolution-redis
     plan: free
     ipAllowList: []
-
-databases:
-  - name: evolution-db
-    plan: free
-    databaseName: evolution
-    user: evolution
