@@ -12,6 +12,10 @@ services:
         value: apikey
       - key: DATABASE_ENABLED
         value: "false"
+      - key: DATABASE_PROVIDER
+        value: postgresql
+      - key: DATABASE_CONNECTION_URI
+        value: "postgresql://unused:unused@localhost:5432/unused"
       - key: CACHE_REDIS_ENABLED
         value: "true"
       - key: CACHE_REDIS_URI
