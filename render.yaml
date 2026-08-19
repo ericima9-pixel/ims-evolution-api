@@ -1,0 +1,46 @@
+services:
+  - type: web
+    name: evolution-api
+    runtime: image
+    plan: free
+    image:
+      url: docker.io/evoapicloud/evolution-api:latest
+    envVars:
+      - key: AUTHENTICATION_API_KEY
+        generateValue: true
+      - key: AUTHENTICATION_TYPE
+        value: apikey
+      - key: DATABASE_ENABLED
+        value: "true"
+      - key: DATABASE_PROVIDER
+        value: postgresql
+      - key: DATABASE_CONNECTION_URI
+        fromDatabase:
+          name: evolution-db
+          property: connectionString
+      - key: DATABASE_SAVE_DATA_INSTANCE
+        value: "true"
+      - key: CACHE_REDIS_ENABLED
+        value: "true"
+      - key: CACHE_REDIS_URI
+        fromService:
+          name: evolution-redis
+          type: keyvalue
+          property: connectionString
+      - key: CACHE_LOCAL_ENABLED
+        value: "false"
+      - key: SERVER_PORT
+        value: "10000"
+      - key: CONFIG_SESSION_PHONE_CLIENT
+        value: IMS-SERVICES
+
+  - type: keyvalue
+    name: evolution-redis
+    plan: free
+    ipAllowList: []
+
+databases:
+  - name: evolution-db
+    plan: free
+    databaseName: evolution
+    user: evolution
